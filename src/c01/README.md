@@ -39,6 +39,6 @@ classDiagram
   IIterator <|.. HiraganaIterator
   IIterator <|.. HiraganaHorizontalIterator
   IAggregate <|.. HiraganaLetters
-  HiraganaLetters o-- HiraganaIterator
-  HiraganaLetters o-- HiraganaHorizontalIterator
+  HiraganaLetters <--o HiraganaIterator
+  HiraganaLetters <--o HiraganaHorizontalIterator
 ```
