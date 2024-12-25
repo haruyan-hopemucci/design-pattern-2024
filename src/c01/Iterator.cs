@@ -24,7 +24,7 @@ namespace C01
    */  
   public class HiraganaLetters : IAggregate<string>
   {
-    private string[] _letters = "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもや＝ゆ＝よらりるれろわ＝＝＝をん".Select(x => x.ToString()).ToArray();
+    private readonly string[] _letters = "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもや＝ゆ＝よらりるれろわ＝＝＝をん".Select(x => x.ToString()).ToArray();
 
     public IIterator<string> CreateIterator()
     {
@@ -43,7 +43,7 @@ namespace C01
    */
   public class HiraganaIterator : IIterator<string>
   {
-    private string[] _letters;
+    private readonly string[] _letters;
     private int _index = 0;
 
     public HiraganaIterator(string[] letters)
@@ -68,7 +68,7 @@ namespace C01
    */
   public class HiraganaHorizontalIterator : IIterator<string>
   {
-    private string[] _letters;
+    private readonly string[] _letters;
     private int _index = 0;
     private int _horizontalIndex = 0;
     public HiraganaHorizontalIterator(string[] letters)
