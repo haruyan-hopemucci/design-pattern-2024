@@ -1,3 +1,3 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
-C01.Runner.Run(); 
+//C01.Runner.Run(); 
+TemplateMethod.Runner.Run();
