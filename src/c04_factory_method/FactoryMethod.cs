@@ -1,7 +1,7 @@
 using System.Globalization;
 using C01;
 
-namespace FactoryMethod.framework
+namespace FactoryMethod.Framework
 {
   public abstract class MapViewer {
     public abstract void show();
@@ -34,9 +34,14 @@ namespace FactoryMethod.googlemap
 {
   using System;
   using System.Collections.Generic;
-  using FactoryMethod.framework;
+  using FactoryMethod.Framework;
   public class RoadmapViewer : MapViewer
   {
+    internal RoadmapViewer()
+    {
+      // コンストラクタ。パッケージ外からのインスタンス生成を禁止
+      // C#ではinternalを使うことで同一アセンブリ内からのみアクセス可能となる
+    }
     public override void show()
     {
       Console.WriteLine("通常のGoogleMapを表示");
@@ -63,6 +68,11 @@ namespace FactoryMethod.googlemap
   }
   public class NoLabelSatelliteViewer : MapViewer
   {
+    internal NoLabelSatelliteViewer()
+    {
+      // コンストラクタ。パッケージ外からのインスタンス生成を禁止
+      // C#ではinternalを使うことで同一アセンブリ内からのみアクセス可能となる
+    }
     public override void show()
     {
       Console.WriteLine("航空写真地図(ラベルなし)を表示");
@@ -91,6 +101,11 @@ namespace FactoryMethod.googlemap
 
   public class NoLabelRoadmapViewer : MapViewer
   {
+    internal NoLabelRoadmapViewer()
+    {
+      // コンストラクタ。パッケージ外からのインスタンス生成を禁止
+      // C#ではinternalを使うことで同一アセンブリ内からのみアクセス可能となる
+    }
     public override void show()
     {
       Console.WriteLine("GoogleMap(ラベルなし)を表示");
