@@ -5,34 +5,36 @@ namespace Singleton {
   /// FIXME: Activateしたあとに他のユーザーがGrantWithすると、他のユーザーの願い事を叶えてしまう。
   /// </summary>
   public class Shenron {
-    /// <summary>
-    /// 正しく呼び出されたかどうかを判定するフラグ。これがtrueの場合のみ願い事を叶えることができる。
-    /// </summary>
-    private bool isActivated = false;
     private static Shenron instance = new Shenron();
+    /// <summary>
+    /// ロック用オブジェクト
+    /// </summary>
+    private Object _lockObject = new Object();
     private Shenron() { }
     public static Shenron GetInstance() {
       return instance;
     }
-    public void Activate(string spell, DragonBall[] dragonBalls) {
-      // ドラゴンボールが7つそろっているかチェック
-      if (!DragonBall.IsNearBy(dragonBalls)) {
-        Console.WriteLine("ドラゴンボールが揃っていません");
-        return;
+    public void Activate(string spell, DragonBall[] dragonBalls, string wish)
+    {
+      // 横取り対策: Activate実行者がGrantWithするまで、ロックをかける
+      // ただしこれはマルチスレッドレベルでは有効だが、マルチプロセスレベルでは適切ではない
+      lock(_lockObject){
+        // ドラゴンボールが7つそろっているかチェック
+        if (!DragonBall.IsNearBy(dragonBalls))
+        {
+          Console.WriteLine("ドラゴンボールが揃っていません");
+          return;
+        }
+        // TODO: 呼び出しの際の呪文が正しいかチェック
+        GrantWish(wish);
       }
-      // TODO: 呼び出しの際の呪文が正しいかチェック
-      isActivated = true;
     }
-    public void GrantWish(string wish) {
-      if (!isActivated) {
-        return;
-      }
+    private void GrantWish(string wish) {
       if (!CanGrantWish(wish)) {
         Console.WriteLine($"{wish}は叶えられない願いです");
         return;
       } else {
         Console.WriteLine($"{wish}を叶えよう");
-        isActivated = false;
       }
     }
     private bool CanGrantWish(string wish) {
@@ -78,14 +80,13 @@ namespace Singleton {
       for (int i = 0; i < 7; i++) {
         balls[i] = DragonBall.GetDragonBall(i + 1);
       }
-      shenron.Activate("いでよ神龍、願いを叶え給え", balls);
-      shenron.GrantWish("世界征服したい");
+      shenron.Activate("いでよ神龍、願いを叶え給え", balls, "世界征服したい");
     }
 
     public static void ExecuteUhron() {
       
       Shenron shenron = Shenron.GetInstance();
-      shenron.GrantWish("ギャルのパンティをおくれー!");
+      shenron.GrantWish("ギャルのパンティをおくれー!");  // こういうことは不可能になった
     }
   }
 }

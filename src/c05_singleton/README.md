@@ -45,3 +45,24 @@ class DragonBall {
 }
 Shenron --> DragonBall : 参照
 ```
+
+改訂版
+
+```mermaid
+classDiagram
+class Shenron {
+  -Shenron$
+  -bool IsActivate
+  -Shenron() コンストラクタ
+  -CanGrantWish(string wish)
+  +GetInstance()$
+  +Activate(string spell, DragonBall[] balls, string wish)
+  -GrantWish(string wish)
+}
+class DragonBall {
+  -Balls
+  -DragonBall()
+  +IsNearBy(DragonBall[] balls)$
+}
+Shenron --> DragonBall : 参照
+```
