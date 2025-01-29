@@ -39,8 +39,9 @@ class Shenron {
   +GrantWish(string wish)
 }
 class DragonBall {
-  -Ball
+  -Balls
   -DragonBall()
   +IsNearBy(DragonBall[] balls)$
 }
+Shenron --> DragonBall : 参照
 ```
