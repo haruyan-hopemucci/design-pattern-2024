@@ -2,9 +2,12 @@ using System;
 namespace Singleton {
   /// <summary>
   /// 神龍クラス
-  /// FIXME: Activateしたあとに他のユーザーがGrantWithすると、他のユーザーの願い事を叶えてしまう。バグチケット参照。
+  /// FIXME: Activateしたあとに他のユーザーがGrantWithすると、他のユーザーの願い事を叶えてしまう。
   /// </summary>
   public class Shenron {
+    /// <summary>
+    /// 正しく呼び出されたかどうかを判定するフラグ。これがtrueの場合のみ願い事を叶えることができる。
+    /// </summary>
     private bool isActivated = false;
     private static Shenron instance = new Shenron();
     private Shenron() { }
@@ -17,10 +20,13 @@ namespace Singleton {
         Console.WriteLine("ドラゴンボールが揃っていません");
         return;
       }
-      // 呼び出しの際の呪文が正しいかチェック
+      // TODO: 呼び出しの際の呪文が正しいかチェック
       isActivated = true;
     }
     public void GrantWish(string wish) {
+      if (!isActivated) {
+        return;
+      }
       if (!CanGrantWish(wish)) {
         Console.WriteLine($"{wish}は叶えられない願いです");
         return;
@@ -41,7 +47,7 @@ namespace Singleton {
       if (balls.Length != 7) {
         return false;
       }
-      // 7つのドラゴンボールが近傍に固まっているかチェックしてから
+      // TODO: 7つのドラゴンボールが近傍に固まっているかチェックしてから
       return true;
     }
   }
