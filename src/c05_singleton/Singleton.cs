@@ -69,4 +69,23 @@ namespace Singleton {
       return true;
     }
   }
+
+  public class Main {
+    public static void Execute() {
+      // ピラフ側
+      Shenron shenron = Shenron.GetInstance();
+      DragonBall[] balls = new DragonBall[7];
+      for (int i = 0; i < 7; i++) {
+        balls[i] = DragonBall.GetDragonBall(i + 1);
+      }
+      shenron.Activate("いでよ神龍、願いを叶え給え", balls);
+      shenron.GrantWish("世界征服したい");
+    }
+
+    public static void ExecuteUhron() {
+      
+      Shenron shenron = Shenron.GetInstance();
+      shenron.GrantWish("ギャルのパンティをおくれー!");
+    }
+  }
 }
