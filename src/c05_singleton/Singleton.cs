@@ -42,9 +42,27 @@ namespace Singleton {
   }
 
   public class DragonBall {
+    static private int MAX_NUMBER = 7;
     public int Number { get; set; }
+    static private IDictionary<int, DragonBall> balls = new Dictionary<int, DragonBall>();
+    private DragonBall(int number) {
+      if(number < 1 || number > 8) {
+        throw new ArgumentException("DragonBall number must be between 1 and 7");
+      }
+      Number = number;
+      // すでに同じ番号で登録されている場合は、dicに登録しない
+      if(!balls.ContainsKey(number)) {
+        balls[number] = this;
+      }
+    }
+    public static DragonBall GetDragonBall(int number) {
+      if (!balls.ContainsKey(number)) {
+        new DragonBall(number);
+      }
+      return balls[number];
+    }
     public static bool IsNearBy(DragonBall[] balls){
-      if (balls.Length != 7) {
+      if (balls.Length != MAX_NUMBER) {
         return false;
       }
       // TODO: 7つのドラゴンボールが近傍に固まっているかチェックしてから
