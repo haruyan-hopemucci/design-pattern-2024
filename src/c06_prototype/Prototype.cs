@@ -1,8 +1,12 @@
 namespace C06_Prototype {
   public class GoodsManager {
     private IDictionary<string, Goods> prototypes = new Dictionary<string, Goods>();
-    public void Register(string identifier, Goods goods) {
-      this.prototypes[identifier] = goods;
+    public void Register(Goods goods) {
+      // Identifierがちゃんとセットされていないと登録させない
+      if(goods.Identifier == null) {
+        throw new ArgumentException("Goods must have an identifier.");
+      }
+      this.prototypes[goods.Identifier] = goods;
     }
     public Goods Create(string identifier) {
       return this.prototypes[identifier].CreateClone();
@@ -86,17 +90,36 @@ namespace C06_Prototype {
         Size = new Size3D { Width = 10, Height = 20, Depth = 5 },
         Shape = new Shape()
       };
+      var acrylGoods2 = new AcrylGoods {
+        Identifier = "acryl002",
+        PrintingImage = new Image(),
+        Size = new Size3D { Width = 30, Height = 30, Depth = 30 },
+        Shape = new Shape()
+      };
       var sticker = new Sticker {
         Identifier = "sticker001",
         PrintingImage = new Image(),
         Material = new Material(),
         CutLines = new List<Shape> { new Shape(), new Shape() }
       };
+      // 実際はsticker1とは形状の違うものだと思ってください
+      var sticker2 = new Sticker {
+        Identifier = "sticker002",
+        PrintingImage = new Image(),
+        Material = new Material(),
+        CutLines = new List<Shape> { new Shape(), new Shape() }
+      };
       // 同じ種類のプロダクトでも寸歩や形状が異なるものをそれぞれプロトタイプとして登録する
-      manager.Register("acryl001", acrylGoods);
-      manager.Register("sticker001", sticker);
+      manager.Register(acrylGoods);
+      manager.Register(acrylGoods2);
+      manager.Register(sticker);
+      manager.Register(sticker2);
+
+      // プロトタイプを使って新しい商品を作る
       var acrylClone = manager.Create("acryl001");
+      // acrylClone をカスタマイズして新しい商品を作る
       var stickerClone = manager.Create("sticker001");
+      // stickerClone をカスタマイズして新しい商品を作る
     }
   }
 }

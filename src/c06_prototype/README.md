@@ -10,6 +10,12 @@ TemplateMethodパターン等と同じで、何かオブジェクトを作成す
 模型となるインスタンスから適切に複製を作るために `cleateClone`というメソッドを実装させるようにする
 Javaではこのような複製が作れるよ、ということを表すインターフェースが仕組みとして備わっている(`java.lang.Cloneable`)
 
+C#でも同様のインターフェースとして `System.ICloneable` が存在するが、自身のシャローコピーを返す `MemberwiseClone`メソッドがObjectに実装されている。
+プロパティや外部からアクセス可能なメンバ変数だけをシャローコピーするので、ディープコピーしたければ自力で実装する必要がある。
+
+https://learn.microsoft.com/ja-jp/dotnet/api/system.object.memberwiseclone?view=net-9.0
+
+
 ## 実装例
 
 オリジナルグッズ販売管理システム
