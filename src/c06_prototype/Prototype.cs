@@ -69,6 +69,7 @@ namespace C06_Prototype {
     }
   }
   public class Size3D {
+    // ちゃんと書いていないがこのクラスはimmutableです
     public double Width{get; set;}
     public double Height{get; set;}
     public double Depth{get; set;}
@@ -76,10 +77,12 @@ namespace C06_Prototype {
 
   public sealed class Shape {
     // 何等かの形状データを保持するクラス
+    // ちゃんと書いていないがこのクラスはimmutableです
   }
 
   public sealed class Material {
     // シールの材質等のデータを保持するクラス
+    // ちゃんと書いていないがこのクラスはimmutableです
   }
 
   public class Main {
