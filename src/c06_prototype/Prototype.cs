@@ -59,12 +59,13 @@ namespace C06_Prototype {
       return rp;
     }
     public Goods CreateClone() {
-      return new Sticker {
-        Identifier = this.Identifier,
-        PrintingImage = this.PrintingImage,
-        Material = this.Material,
-        CutLines = this.CutLines
-      };
+      // return new Sticker {
+      //   Identifier = this.Identifier,
+      //   PrintingImage = this.PrintingImage,
+      //   Material = this.Material,
+      //   CutLines = this.CutLines
+      // };
+      return (Goods)this.MemberwiseClone();
     }
   }
   public class Size3D {
