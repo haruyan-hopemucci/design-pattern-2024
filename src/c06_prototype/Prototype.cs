@@ -119,8 +119,10 @@ namespace C06_Prototype {
       // プロトタイプを使って新しい商品を作る
       var acrylClone = manager.Create("acryl001");
       // acrylClone をカスタマイズして新しい商品を作る
+      acrylClone.PrintingImage = new Image(); // 好きな画像に変更
       var stickerClone = manager.Create("sticker001");
       // stickerClone をカスタマイズして新しい商品を作る
+      stickerClone.PrintingImage = new Image(); // 好きな画像に変更
     }
   }
 }
