@@ -72,6 +72,8 @@ namespace C07_Builder {
   }
 
   public class ExcelEstimateBuilder : IEstimateBuilder {
+    // builderの中にExcelのインスタンスを保持する
+    private Object excelInstance;
     public void SetCustomerInfo(Organizaion org) {
       // 顧客情報をExcelの特定セルに設定する
     }
@@ -103,6 +105,8 @@ namespace C07_Builder {
   }
 
   public class PdfEstimateBuilder : IEstimateBuilder {
+    // builderの中にPDFのインスタンスを保持する
+    private Object pdfInstance;
     public void SetCustomerInfo(Organizaion org) {
       // 顧客情報をPDFに設定する
     }
