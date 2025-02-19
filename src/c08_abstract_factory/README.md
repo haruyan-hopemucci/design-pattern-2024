@@ -16,6 +16,9 @@
 classDiagram
 
 namespace AbstractFactory {
+  class Director {
+    Produce(ClassName)
+  }
   class Factory{
     <<abstract>>
     GetFactory()$
@@ -39,9 +42,9 @@ namespace AbstractFactory {
     <<商品陳列棚>>
     vendorLogo
     drinkMocks
-    Assemble(Parts)
+    Assemble(VenderLogo, DrinkMock)
   }
-  class VenderLogo {
+  class VendorLogo {
   }
   class DrinkMock {
   }
@@ -49,13 +52,13 @@ namespace AbstractFactory {
     <<自動販売機の外観>>
     painting
     wrapping
-    Assemble(Parts)
+    Assemble(Painting, Wrapping)
   }
   class Monitor {
     <<液晶操作パネル>>
     lcdDisplay
     console
-    Assemble(Parts)
+    Assemble(LcdDisplay, Console)
   }
   class LcdDisplay {
     Assemble(Parts)
@@ -72,14 +75,17 @@ namespace CokaCora {
   }
 }
   Parts <|-- ShowCase : extends
-  Parts <|-- VenderLogo : extends
+  Parts <|-- VendorLogo : extends
   Parts <|-- DrinkMock : extends
   Parts <|-- ExternalDisplay : extends
   Parts <|-- Monitor : extends
   Parts <|-- LcdDisplay : extends
   Parts <|-- Console : extends
+  ShowCase --> VendorLogo : uses
+  ShowCase o--> DrinkMock : uses
 
   CokaCoraVendorFactory <|-- Factory : extends
   ShowCase <|-- CokaCoraShowCase : extends
 
+  Director --> Factory : uses
 ```
