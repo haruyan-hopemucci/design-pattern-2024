@@ -23,7 +23,7 @@ class AbstractProductsResponse {
   PropatiesToDictionary()
 }
 
-class ProductResopnse {
+class ProductResponse {
   <<初期に作られたレスポンスオブジェクト>>
   string Code
   double SellingPrice
@@ -38,13 +38,13 @@ class ProductResponseDecorator {
   ProductResponse Data
 }
 
-class ProductResopnseV2 {
+class ProductResponseV2 {
   string version : APIバージョン
   string Maker : 商品のメーカー
   string MakerCode : メーカー側が発番している商品コード
 }
 
-class ProductResopnseV3 {
+class ProductResponseV3 {
   double VatRate : 消費税率
 }
 
@@ -69,7 +69,7 @@ class ProductResponseV3ToV4Decorator {
   ToJson()
 }
 
-AbstractProductsResponse <|-- ProductResopnse
+AbstractProductsResponse <|-- ProductResponse
 AbstractProductsResponse <|-- ProductResponseDecorator
 ProductResponseDecorator <|-- ProductResponseV1ToV2Decorator
 ProductResponseDecorator <|-- ProductResponseV2ToV3Decorator
@@ -77,10 +77,10 @@ ProductResponseDecorator <|-- ProductResponseV3ToV4Decorator
 ProductResponse <|-- ProductResponseV2
 ProductResponseV2 <|-- ProductResponseV3
 ProductResponseV3 <|-- ProductResponseV4
-ProductResponseV1ToV2Decorator o--> ProductResponse : uses
-ProductResponseV2ToV3Decorator o--> ProductResponseV2 : uses
-ProductResponseV2ToV3Decorator o--> ProductResponseV1ToV2Decorator : uses
-ProductResponseV3ToV4Decorator o--> ProductResponseV3 : uses
-ProductResponseV3ToV4Decorator o--> ProductResponseV2ToV3Decorator : 
+ProductResponseV1ToV2Decorator o-- ProductResponse : uses
+ProductResponseV2ToV3Decorator o-- ProductResponseV2 : uses
+ProductResponseV2ToV3Decorator o-- ProductResponseV1ToV2Decorator : uses
+ProductResponseV3ToV4Decorator o-- ProductResponseV3 : uses
+ProductResponseV3ToV4Decorator o-- ProductResponseV2ToV3Decorator : 
 
 ```
