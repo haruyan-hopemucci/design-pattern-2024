@@ -10,7 +10,7 @@ namespace Decorator
     public abstract string ToJson();
 
     /// <summary>
-    /// プロパティをDictionaryに変換する
+    /// プロパティをDictionaryに変換する 
     /// </summary>
     /// <returns></returns>
     public virtual IDictionary<string, object> PropatiesToDictionary()
